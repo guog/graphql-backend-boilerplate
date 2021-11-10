@@ -1,0 +1,19 @@
+{
+  // Note: You can delete this file if you're not using vscode
+  // https://github.com/graphql-nexus/schema/blob/develop/.vscode/launch.json
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug App",
+      "protocol": "inspector",
+      "cwd": "${workspaceRoot}",
+      "localRoot": "${workspaceRoot}",
+      "runtimeExecutable": "yarn",
+      "args": ["dev"],
+      "restart": true,
+      "sourceMaps": true
+    }
+  ]
+}

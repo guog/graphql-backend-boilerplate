@@ -1,0 +1,43 @@
+{
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.editorconfig": true,
+    "**/.git": true,
+    "**/.gitattributes": true,
+    "**/.gitignore": true,
+    "**/.gitlab": true,
+    "**/.graphqlconfig.yml": true,
+    "**/.hg": true,
+    "**/.prettierignore": true,
+    "**/.prettierrc.yaml": true,
+    "**/.svn": true,
+    "**/CVS": true,
+    "**/dist": true,
+    "**/node_modules": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.associations": {
+    "*.prisma": "prisma"
+  },
+  "todohighlight.include": ["**/*.js", "**/*.markdown", "**/*.md", "**/*.ts"],
+  "npm.packageManager": "yarn",
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.hg/store/**": true,
+    "node_modules": true,
+    "dist": true
+  },
+  "markdownlint.ignore": ["CHANGELOG.md", "code_of_conduct.md"],
+  "eslint.format.enable": true,
+  "eslint.packageManager": "yarn"
+}
