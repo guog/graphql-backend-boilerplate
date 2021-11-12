@@ -13,6 +13,7 @@
     "**/.gitattributes": true,
     "**/.gitignore": true,
     "**/.gitlab": true,
+    "**/.github": true,
     "**/.graphqlconfig.yml": true,
     "**/.hg": true,
     "**/.prettierignore": true,
@@ -37,7 +38,5 @@
     "node_modules": true,
     "dist": true
   },
-  "markdownlint.ignore": ["CHANGELOG.md", "code_of_conduct.md"],
-  "eslint.format.enable": true,
-  "eslint.packageManager": "yarn"
+  "markdownlint.ignore": ["CHANGELOG.md", "code_of_conduct.md"]
 }

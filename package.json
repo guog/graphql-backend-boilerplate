@@ -6,17 +6,19 @@
   "repository": "https://github.com/guog/graphql-backend-boilerplate.git",
   "author": "guog <guog@live.cn>",
   "license": "MIT",
+  "private": true,
   "devDependencies": {
+    "@paljs/cli": "^4.0.12",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.5",
+    "@types/lodash": "^4.14.176",
+    "@types/lru-cache": "^5.1.1",
     "@types/node": "^16.11.7",
+    "@types/validator": "^13.6.6",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
-    "eslint": "^8.2.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-jest": "^25.2.4",
-    "husky": "^7.0.4",
+    "dotenv-cli": "^4.1.0",
     "jest": "^27.3.1",
-    "lint-staged": "^11.2.6",
-    "mrm": "^3.0.10",
     "prettier": "^2.4.1",
     "prisma": "^3.4.2",
     "ts-node": "^10.4.0",
@@ -24,29 +26,40 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "@paljs/nexus": "^4.0.11",
     "@prisma/client": "^3.4.2",
     "apollo-server-core": "^3.5.0",
     "apollo-server-express": "^3.5.0",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
-    "graphql": "^16.0.1",
+    "express": "^4.17.1",
+    "graphql": "^15.7.2",
+    "graphql-middleware": "^6.1.12",
     "graphql-scalars": "^1.13.1",
-    "nexus": "^1.1.0"
+    "i18next": "^21.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "lru-cache": "^6.0.0",
+    "nexus": "^1.1.0",
+    "nexus-validate": "^1.2.0",
+    "validator": "^13.7.0",
+    "yup": "^0.32.11"
   },
   "prisma": {
     "schema": "prisma/schema.prisma"
   },
-  "lint-staged": {
-    "src/**/*.{ts,md}": [
-      "npx prettier --write --ignore-unknown",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "scripts": {
-    "prepare": "husky install"
+    "prod": "node dist/index",
+    "dev": "dotenv -e ./dotenv/.env.development -- ts-node-dev --respawn --transpile-only --files src/index.ts",
+    "clean": "rm -rf dist",
+    "build": "yarn clean && yarn generate && tsc",
+    "format": "prettier --write --ignore-unknown './src/**/*.{ts,md}'",
+    "generate:code": "rm -rf ./src/.generated && pal g  && prettier --write './src/.generated/**/*.ts'",
+    "generate": "yarn generate:prisma && yarn generate:nexus",
+    "generate:prisma": "prisma generate",
+    "generate:nexus": "ts-node --transpile-only src/schema",
+    "postinstall": "yarn generate",
+    "db-push": "dotenv -e ./dotenv/.env.development -- prisma db push",
+    "studio": "dotenv -e ./dotenv/.env.development -- prisma studio"
   }
 }

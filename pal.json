@@ -1,0 +1,16 @@
+{
+  "backend": {
+    "generator": "nexus",
+    "excludeFieldsByModel": { "User": ["password"] },
+    "output": "./src/.generated/",
+    "schema": "./prisma/schema.prisma"
+  },
+  "frontend": {
+    "admin": false,
+    "graphql": {
+      "output": "./tests/graphql/",
+      "excludeFieldsByModel": { "User": ["password"] },
+      "schema": "./prisma/schema.prisma"
+    }
+  }
+}
