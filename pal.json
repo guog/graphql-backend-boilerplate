@@ -2,14 +2,28 @@
   "backend": {
     "generator": "nexus",
     "excludeFieldsByModel": { "User": ["password"] },
-    "output": "./src/.generated/",
+    "excludeModels": [
+      {
+        "name": "User",
+        "queries": true,
+        "mutations": true
+      }
+    ],
+    "output": "./.generated/graphql/",
     "schema": "./prisma/schema.prisma"
   },
   "frontend": {
     "admin": false,
     "graphql": {
-      "output": "./tests/graphql/",
+      "output": "./.generated/client/",
       "excludeFieldsByModel": { "User": ["password"] },
+      "excludeModels": [
+        {
+          "name": "User",
+          "queries": true,
+          "mutations": true
+        }
+      ],
       "schema": "./prisma/schema.prisma"
     }
   }

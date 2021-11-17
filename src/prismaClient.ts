@@ -4,7 +4,7 @@ import { IsProductionMode } from './environment'
 function createPrismaClient(): PrismaClient {
   const prisma = new PrismaClient({
     log: IsProductionMode
-      ? undefined
+      ? [{ emit: 'stdout', level: 'error' }]
       : [
           { emit: 'stdout', level: 'query' },
           { emit: 'stdout', level: 'info' },

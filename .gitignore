@@ -1,4 +1,4 @@
-src/.generated/*
+.generated/*
 prisma/migrations/*
 db/*
 !db/.gitkeep

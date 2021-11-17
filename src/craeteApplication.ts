@@ -1,13 +1,12 @@
-import express from 'express'
-
 import cors from 'cors'
+import express from 'express'
 
 function createApp() {
   const app = express()
 
   app.use(cors())
   app.set('trust proxy', true)
-  // ({ type: 'application/json', limit: '10MB' }))
+  app.use(express.json({ type: 'application/json', limit: '10MB' }))
 
   /* app.get('/', (req, res) => {
     res.send('It works - ver. 0.0.1')

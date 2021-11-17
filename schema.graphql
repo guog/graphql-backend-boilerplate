@@ -8,6 +8,12 @@ type AggregateUser {
   _min: UserMinAggregateOutputType
 }
 
+"""user's token on successful login"""
+type AuthPayload {
+  """user's token"""
+  token: String!
+}
+
 type BatchPayload {
   count: Int!
 }
@@ -71,12 +77,27 @@ scalar Decimal
 scalar Json
 
 type Mutation {
-  createOneUser(data: UserCreateInput!): User!
-  deleteManyUser(where: UserWhereInput): BatchPayload!
-  deleteOneUser(where: UserWhereUniqueInput!): User
-  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
-  upsertOneUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+  """Change Password"""
+  changePassword(
+    """new password"""
+    newPassword: String!
+
+    """origin password"""
+    password: String!
+  ): AuthPayload!
+
+  """Sign In"""
+  signIn(
+    """user name"""
+    name: String!
+
+    """password"""
+    password: String!
+  ): AuthPayload!
+
+  """user sign up"""
+  signUp(data: SignUpInput!): User!
+  updateProfile(data: UpdateProfileInput!): User!
 }
 
 input NestedBoolFilter {
@@ -206,16 +227,15 @@ input NullableStringFieldUpdateOperationsInput {
 }
 
 type Query {
-  aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByWithRelationInput], skip: Int, take: Int, where: UserWhereInput): AggregateUser
-  findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum], orderBy: [UserOrderByWithRelationInput], skip: Int, take: Int, where: UserWhereInput): User
-  findManyUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum], orderBy: [UserOrderByWithRelationInput], skip: Int, take: Int, where: UserWhereInput): [User!]!
-  findManyUserCount(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum], orderBy: [UserOrderByWithRelationInput], skip: Int, take: Int, where: UserWhereInput): Int!
-  findUniqueUser(where: UserWhereUniqueInput!): User
+  """get current user info"""
+  me: User!
 }
 
-enum QueryMode {
-  default
-  insensitive
+"""user sign up input type"""
+input SignUpInput {
+  name: String!
+  nickName: String
+  password: String!
 }
 
 enum SortOrder {
@@ -236,7 +256,6 @@ input StringFilter {
   in: [String]
   lt: String
   lte: String
-  mode: QueryMode
   not: NestedStringFilter
   notIn: [String]
   startsWith: String
@@ -251,7 +270,6 @@ input StringNullableFilter {
   in: [String]
   lt: String
   lte: String
-  mode: QueryMode
   not: NestedStringNullableFilter
   notIn: [String]
   startsWith: String
@@ -269,7 +287,6 @@ input StringNullableWithAggregatesFilter {
   in: [String]
   lt: String
   lte: String
-  mode: QueryMode
   not: NestedStringNullableWithAggregatesFilter
   notIn: [String]
   startsWith: String
@@ -287,10 +304,14 @@ input StringWithAggregatesFilter {
   in: [String]
   lt: String
   lte: String
-  mode: QueryMode
   not: NestedStringWithAggregatesFilter
   notIn: [String]
   startsWith: String
+}
+
+"""update profile input type"""
+input UpdateProfileInput {
+  nickName: String
 }
 
 """User Account"""
@@ -323,15 +344,6 @@ input UserCountOrderByAggregateInput {
 }
 
 input UserCreateInput {
-  createdAt: DateTime
-  disabled: Boolean
-  id: String
-  name: String!
-  nickName: String!
-  updatedAt: DateTime
-}
-
-input UserCreateManyInput {
   createdAt: DateTime
   disabled: Boolean
   id: String
