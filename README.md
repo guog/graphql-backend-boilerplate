@@ -1,6 +1,15 @@
-# graphql-backend-boilerplate
+# Quickly GraphQL Server
 
-(**WIP**) Graphql back-end service boilerplate based on Node.js and TypeScript.
+(**WIP**) Use TypeScript to quickly build a GraphQL server, especially for CRUD functions, almost without writing code.
+
+Minimal code, flexible CRUD API.
+
+## Principles
+
+This project is built with the following principles in mind:
+
+- Practical: everything with practical as the main purpose;
+- Simple: Keep it simple, easy to maintain and implement.
 
 ## TODO
 
