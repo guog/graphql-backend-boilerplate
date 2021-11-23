@@ -18,47 +18,47 @@ import {
 const ErrorDefine = Object.freeze({
   SignInFailure: {
     code: SIGN_IN_FAILURE,
-    description: 'sign in failure'
+    message: 'sign in failure'
   },
   UserNotExist: {
     code: USER_NOT_EXIST,
-    description: 'user not exist'
+    message: 'user not exist'
   },
   UserDisabled: {
     code: USER_DISABLED,
-    description: 'user has been disabled'
+    message: 'user has been disabled'
   },
   PasswordIncorrect: {
     code: PASSWORD_INCORRECT,
-    description: 'password incorrect'
+    message: 'password incorrect'
   },
   UserFrozen: {
     code: USER_FROZEN,
-    description: 'user has been frozen'
+    message: 'user has been frozen'
   },
   Unauthenticated: {
     code: UNAUTHENTICATED,
-    description: 'authenticate failure'
+    message: 'authenticate failure'
   },
   OverLimit: {
     code: OVER_LIMIT,
-    description: 'over limit'
+    message: 'over limit'
   },
   InvalidToken: {
     code: INVALID_TOKEN,
-    description: 'invalid token'
+    message: 'invalid token'
   },
   Forbidden: {
     code: FORBIDDEN,
-    description: 'forbidden'
+    message: 'forbidden'
   },
   NotFound: {
     code: NOT_FOUND,
-    description: 'not found'
+    message: 'not found'
   },
   Unique: {
     code: UNIQUE,
-    description: 'unique value, but already exists '
+    message: 'unique value, but already exists '
   }
 })
 

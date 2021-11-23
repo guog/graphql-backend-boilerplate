@@ -49,8 +49,8 @@ export interface UserFrozenErrorArg extends PasswordIncorrectErrorArg {
  */
 export class SignInFailureError extends ApolloError {
   constructor() {
-    super(eds.SignInFailure.description, eds.SignInFailure.code, {
-      description: eds.SignInFailure.description
+    super(eds.SignInFailure.message, eds.SignInFailure.code, {
+      timestamp: new Date()
     })
 
     Object.defineProperty(this, 'name', { value: 'SignInFailureError' })
@@ -66,8 +66,7 @@ export class SignInFailureError extends ApolloError {
  */
 export class PasswordIncorrectError extends ApolloError {
   constructor(payload?: PasswordIncorrectErrorArg) {
-    super(eds.PasswordIncorrect.description, eds.PasswordIncorrect.code, {
-      description: eds.PasswordIncorrect.description,
+    super(eds.PasswordIncorrect.message, eds.PasswordIncorrect.code, {
       timestamp: new Date(),
       payload
     })
@@ -87,8 +86,7 @@ export class PasswordIncorrectError extends ApolloError {
  */
 export class UserDisabledError extends ApolloError {
   constructor() {
-    super(eds.UserDisabled.description, eds.UserDisabled.code, {
-      description: eds.UserDisabled.description,
+    super(eds.UserDisabled.message, eds.UserDisabled.code, {
       timestamp: new Date()
     })
     Object.defineProperty(this, 'name', {
@@ -106,8 +104,7 @@ export class UserDisabledError extends ApolloError {
  */
 export class UserFrozenError extends ApolloError {
   constructor(payload: UserFrozenErrorArg) {
-    super(eds.UserFrozen.description, eds.UserFrozen.code, {
-      description: eds.UserFrozen.description,
+    super(eds.UserFrozen.message, eds.UserFrozen.code, {
       timestamp: new Date(),
       payload
     })
@@ -127,8 +124,7 @@ export class UserFrozenError extends ApolloError {
  */
 export class UserNotExistError extends ApolloError {
   constructor() {
-    super(eds.UserNotExist.description, eds.UserNotExist.code, {
-      description: eds.UserNotExist.description,
+    super(eds.UserNotExist.message, eds.UserNotExist.code, {
       timestamp: new Date()
     })
 
@@ -138,8 +134,7 @@ export class UserNotExistError extends ApolloError {
 
 export class AuthenticationError extends ApolloError {
   constructor() {
-    super(eds.Unauthenticated.description, eds.Unauthenticated.code, {
-      description: eds.Unauthenticated.description,
+    super(eds.Unauthenticated.message, eds.Unauthenticated.code, {
       timestamp: new Date()
     })
 
@@ -149,8 +144,7 @@ export class AuthenticationError extends ApolloError {
 
 export class ForbiddenError extends ApolloError {
   constructor() {
-    super(eds.Forbidden.description, eds.Forbidden.code, {
-      description: eds.Forbidden.description,
+    super(eds.Forbidden.message, eds.Forbidden.code, {
       timestamp: new Date()
     })
 
@@ -160,8 +154,7 @@ export class ForbiddenError extends ApolloError {
 
 export class InvalidTokenError extends ApolloError {
   constructor() {
-    super(eds.InvalidToken.description, eds.InvalidToken.code, {
-      description: eds.InvalidToken.description,
+    super(eds.InvalidToken.message, eds.InvalidToken.code, {
       timestamp: new Date()
     })
 

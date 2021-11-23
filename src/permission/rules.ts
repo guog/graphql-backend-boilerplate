@@ -5,7 +5,7 @@ import { AuthenticationError } from '../errors'
 
 export const isAuthenticated = rule({ cache: 'contextual' })(
   async (_parent, _args, { user }: Context) => {
-    if (isEmpty(user)) {
+    if (isEmpty(user?.id)) {
       return new AuthenticationError()
     }
     return true

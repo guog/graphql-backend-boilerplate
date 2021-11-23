@@ -1,7 +1,7 @@
 import { allow } from 'graphql-shield'
 import { isAuthenticated } from './rules'
 
-const rules = {
+const permissions = {
   Query: {
     '*': isAuthenticated
   },
@@ -11,4 +11,4 @@ const rules = {
   }
 }
 
-export default rules
+export default permissions

@@ -71,6 +71,7 @@
     "generate:nexus": "ts-node --transpile-only src/schema",
     "postinstall": "yarn generate",
     "db-push": "prisma db push",
+    "db-seed": "prisma db seed",
     "studio": "prisma studio"
   }
 }

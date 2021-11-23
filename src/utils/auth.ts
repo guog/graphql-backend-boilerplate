@@ -1,7 +1,7 @@
 import { compare, hash } from 'bcryptjs'
 import type { Request } from 'express'
 import { sign, verify } from 'jsonwebtoken'
-import { replace } from 'lodash'
+import { isEmpty, replace } from 'lodash'
 import { APP_SECRET, APP_TOKEN_EXPIRES_IN } from '../environment'
 import prisma from '../prismaClient'
 
@@ -12,16 +12,13 @@ interface UserToken {
 const AuthorizationSchema = 'Bearer '
 const AuthorizationHeaderName = 'Authorization'
 
-/**
- * Extract userId from JWT.
- *
- * @param {string} token JWT string
- * @return {string} user id if available. '' otherwise.
- */
-function getUserIdFromToken(token: string) {
-  const userToken = resolveToken(token)
-
-  return userToken?.userId || ''
+async function fetchUserById(id: string) {
+  if (isEmpty(id)) {
+    return null
+  }
+  return await prisma.user.findUnique({
+    where: { id }
+  })
 }
 
 /**
@@ -31,33 +28,29 @@ function getUserIdFromToken(token: string) {
  * @return {*}  {(string)}
  */
 function getToken(req: Request): string {
-  const authorization = req.get(AuthorizationHeaderName)
+  const authorization = req.get(AuthorizationHeaderName) || ''
   return replace(authorization, AuthorizationSchema, '')
 }
 
-export async function getUser(req: Request) {
-  let token = getToken(req)
-  const id = getUserIdFromToken(token)
-  // FIXME: cache data
-  return await prisma.user.findUnique({
-    where: { id }
-  })
+export async function createContextUser(req: Request) {
+  try {
+    const token = getToken(req)
+    if (!isEmpty(token)) {
+      const verifiedToken = (verify(token, APP_SECRET) as UserToken) || null
+      return await fetchUserById(verifiedToken.userId)
+    }
+  } catch (err) {
+    console.error(err)
+  }
+
+  return null
 }
 
 export function generateToken(
   payload: object,
   expiresIn: string | number = APP_TOKEN_EXPIRES_IN
 ) {
-  return sign(payload, APP_SECRET, { expiresIn })
-}
-
-export function resolveToken(token: string) {
-  try {
-    return verify(token, APP_SECRET) as UserToken
-  } catch (err: any) {
-    console.error(err.message)
-    throw err
-  }
+  return AuthorizationSchema + sign(payload, APP_SECRET, { expiresIn })
 }
 
 /**

@@ -4,6 +4,7 @@ import {
   ApolloServerPluginInlineTrace,
   ApolloServerPluginInlineTraceDisabled,
   ApolloServerPluginLandingPageDisabled,
+  ApolloServerPluginLandingPageGraphQLPlayground,
   ApolloServerPluginLandingPageLocalDefault,
   ApolloServerPluginUsageReportingDisabled,
   AuthenticationError

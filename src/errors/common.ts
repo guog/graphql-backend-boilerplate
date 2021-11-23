@@ -3,8 +3,7 @@ import eds from './context'
 
 export class NotFoundError extends ApolloError {
   constructor() {
-    super(eds.NotFound.description, eds.NotFound.code, {
-      description: eds.NotFound.description,
+    super(eds.NotFound.message, eds.NotFound.code, {
       timestamp: new Date()
     })
 
@@ -14,8 +13,7 @@ export class NotFoundError extends ApolloError {
 
 export class OverLimitError extends ApolloError {
   constructor() {
-    super(eds.OverLimit.description, eds.OverLimit.code, {
-      description: eds.OverLimit.description,
+    super(eds.OverLimit.message, eds.OverLimit.code, {
       timestamp: new Date()
     })
 
@@ -25,8 +23,7 @@ export class OverLimitError extends ApolloError {
 
 export class UniqueError extends ApolloError {
   constructor(fieldName?: string) {
-    super(eds.Unique.description, eds.Unique.code, {
-      description: eds.Unique.description,
+    super(eds.Unique.message, eds.Unique.code, {
       timestamp: new Date(),
       fieldName
     })
