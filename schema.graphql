@@ -231,6 +231,11 @@ type Query {
   me: User!
 }
 
+enum QueryMode {
+  default
+  insensitive
+}
+
 """user sign up input type"""
 input SignUpInput {
   name: String!
@@ -256,6 +261,7 @@ input StringFilter {
   in: [String]
   lt: String
   lte: String
+  mode: QueryMode
   not: NestedStringFilter
   notIn: [String]
   startsWith: String
@@ -270,6 +276,7 @@ input StringNullableFilter {
   in: [String]
   lt: String
   lte: String
+  mode: QueryMode
   not: NestedStringNullableFilter
   notIn: [String]
   startsWith: String
@@ -287,6 +294,7 @@ input StringNullableWithAggregatesFilter {
   in: [String]
   lt: String
   lte: String
+  mode: QueryMode
   not: NestedStringNullableWithAggregatesFilter
   notIn: [String]
   startsWith: String
@@ -304,6 +312,7 @@ input StringWithAggregatesFilter {
   in: [String]
   lt: String
   lte: String
+  mode: QueryMode
   not: NestedStringWithAggregatesFilter
   notIn: [String]
   startsWith: String
@@ -344,6 +353,15 @@ input UserCountOrderByAggregateInput {
 }
 
 input UserCreateInput {
+  createdAt: DateTime
+  disabled: Boolean
+  id: String
+  name: String!
+  nickName: String!
+  updatedAt: DateTime
+}
+
+input UserCreateManyInput {
   createdAt: DateTime
   disabled: Boolean
   id: String

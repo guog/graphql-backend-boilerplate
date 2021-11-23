@@ -48,11 +48,12 @@
     "yup": "^0.32.11"
   },
   "prisma": {
-    "schema": "prisma/schema.prisma"
+    "schema": "prisma/schema.prisma",
+    "seed": "ts-node prisma/seed.ts"
   },
   "scripts": {
     "prod": "node dist/index",
-    "dev": "dotenv -e ./.env.development -- ts-node-dev --respawn --transpile-only --files src/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --files src/index.ts",
     "clean": "rm -rf dist",
     "build": "yarn clean && yarn generate && tsc",
     "format": "prettier --write --ignore-unknown './src/**/*.{ts,md}'",
@@ -61,7 +62,7 @@
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only src/schema",
     "postinstall": "yarn generate",
-    "db-push": "dotenv -e ./.env.development -- prisma db push",
-    "studio": "dotenv -e ./.env.development -- prisma studio"
+    "db-push": "prisma db push",
+    "studio": "prisma studio"
   }
 }

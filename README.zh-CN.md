@@ -1,6 +1,6 @@
 # 快速构建 GraphQL 服务
 
-(**WIP**) 使用 TypeScript 快速构建 GraphQL 服务端,尤其对于 CRUD 功能,几乎不用编写代码.
+使用 TypeScript 快速构建 GraphQL 服务端,尤其对于 CRUD 功能,几乎不用编写代码.
 
 极少的代码, 实现灵活多样的 CRUD API.
 

@@ -1,5 +1,6 @@
 import type { PrismaClient, User } from '@prisma/client'
 import type { Request, Response } from 'express'
+import { APP_SHIELD_DISABLED } from './environment'
 import prisma from './prismaClient'
 import { getUser } from './utils/auth'
 
@@ -18,7 +19,8 @@ export async function createContext(params: {
 }): Promise<Context> {
   const { req, res } = params
   const user =
-    req?.body?.operationName === 'IntrospectionQuery'
+    req?.body?.operationName === 'IntrospectionQuery' &&
+    APP_SHIELD_DISABLED !== true
       ? null
       : await getUser(req)
 

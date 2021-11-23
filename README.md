@@ -1,6 +1,6 @@
 # Quickly GraphQL Server
 
-(**WIP**) Use TypeScript to quickly build a GraphQL server, especially for CRUD functions, almost without writing code.
+Use TypeScript to quickly build a GraphQL server, especially for CRUD functions, almost without writing code.
 
 Minimal code, flexible CRUD API.
 
