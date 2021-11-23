@@ -2,9 +2,12 @@
   "name": "graphql-backend-boilerplate",
   "version": "1.0.0",
   "description": "Graphql back-end service boilerplate based on node and typescript.",
-  "main": "dist/index.js",
-  "repository": "https://github.com/guog/graphql-backend-boilerplate.git",
-  "author": "guog <guog@live.cn>",
+  "repository": "github:guog/graphql-backend-boilerplate.git",
+  "author": {
+    "name": "guog",
+    "email": "guog@live.cn",
+    "url": "https://github.com/guog"
+  },
   "license": "MIT",
   "private": true,
   "engines": {
@@ -57,7 +60,7 @@
     "seed": "ts-node prisma/seed.ts"
   },
   "scripts": {
-    "prod": "node dist/index",
+    "start": "node dist",
     "dev": "ts-node-dev --respawn --transpile-only --files src/index.ts",
     "clean": "rm -rf dist",
     "build": "yarn clean && yarn generate && tsc",

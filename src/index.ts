@@ -5,7 +5,6 @@ import {
   ApolloServerPluginInlineTraceDisabled,
   ApolloServerPluginLandingPageDisabled,
   ApolloServerPluginLandingPageLocalDefault,
-  ApolloServerPluginLandingPageProductionDefault,
   ApolloServerPluginUsageReportingDisabled,
   AuthenticationError
 } from 'apollo-server-core'
@@ -25,7 +24,6 @@ import {
   APP_PATH,
   APP_PORT,
   APP_SHIELD_DISABLED,
-  IsDevelopmentMode,
   IsProductionMode,
   NODE_ENV
 } from './environment'
@@ -68,9 +66,7 @@ function createApolloServer(httpServer: http.Server) {
         : ApolloServerPluginInlineTrace(),
       IsProductionMode
         ? ApolloServerPluginLandingPageDisabled()
-        : IsDevelopmentMode
-        ? ApolloServerPluginLandingPageLocalDefault({ footer: false })
-        : ApolloServerPluginLandingPageProductionDefault({ footer: false })
+        : ApolloServerPluginLandingPageLocalDefault()
     ]
   })
 }
