@@ -1,5 +1,13 @@
+import { altairExpress } from 'altair-express-middleware'
 import cors from 'cors'
 import express from 'express'
+import { APP_PATH } from './environment'
+
+const initialQuery = `mutation {
+  signIn(name: "admin", password: "admin") {
+    token
+  }
+}`
 
 function createApp() {
   const app = express()
@@ -15,6 +23,19 @@ function createApp() {
   app.set('views', path.join(__dirname, '../html'))
   app.engine('html', ejs.renderFile)
   app.set('view engine', 'html') */
+
+  app.use(
+    `${APP_PATH}`,
+    altairExpress({
+      /*
+      initialSettings: {
+        language: 'zh-CN'
+      }, */
+      endpointURL: `${APP_PATH}`,
+      //subscriptionsEndpoint: `ws://localhost:4000/subscriptions`,
+      initialQuery
+    })
+  )
 
   return app
 }
