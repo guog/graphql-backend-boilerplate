@@ -4,23 +4,16 @@ import {
   ApolloServerPluginInlineTrace,
   ApolloServerPluginInlineTraceDisabled,
   ApolloServerPluginLandingPageDisabled,
-  ApolloServerPluginLandingPageLocalDefault,
   ApolloServerPluginUsageReportingDisabled
 } from 'apollo-server-core'
-import { ApolloServer, AuthenticationError } from 'apollo-server-express'
+import { ApolloServer } from 'apollo-server-express'
 import { Application } from 'express'
-import { GraphQLError } from 'graphql'
-import {
-  JsonWebTokenError,
-  NotBeforeError,
-  TokenExpiredError
-} from 'jsonwebtoken'
+import { applyMiddleware } from 'graphql-middleware'
 import http from 'http'
 import { createContext } from './context'
 import { APP_PATH, APP_SHIELD_DISABLED, IsProductionMode } from './environment'
-import schema from './schema'
 import permission from './permission'
-import { applyMiddleware } from 'graphql-middleware'
+import schema from './schema'
 
 const schemaWithMiddleware = applyMiddleware(
   schema,
@@ -34,18 +27,6 @@ export function createApolloServer(httpServer: http.Server) {
     introspection: !IsProductionMode,
     debug: !IsProductionMode,
     persistedQueries: false,
-    formatError: (err: GraphQLError) => {
-      console.error(err)
-      if (err instanceof TokenExpiredError) {
-        return new AuthenticationError('Token Expired')
-      } else if (err instanceof JsonWebTokenError) {
-        return new AuthenticationError('Token Invalid')
-      } else if (err instanceof NotBeforeError) {
-        return new AuthenticationError('Token Not Actived')
-      }
-
-      return err
-    },
     plugins: [
       ApolloServerPluginDrainHttpServer({
         httpServer,

@@ -1,5 +1,6 @@
 import {
   FORBIDDEN,
+  INTERNAL_SERVER_ERROR,
   INVALID_TOKEN,
   NOT_FOUND,
   OVER_LIMIT,
@@ -58,7 +59,11 @@ const ErrorDefine = Object.freeze({
   },
   Unique: {
     code: UNIQUE,
-    message: 'unique value, but already exists '
+    message: 'unique value, but already exists'
+  },
+  InternalServerError: {
+    code: INTERNAL_SERVER_ERROR,
+    message: 'internal server error'
   }
 })
 
