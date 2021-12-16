@@ -4,6 +4,8 @@ docs/*
 *.md
 .vscode/*
 .env.*
+node_modules
+bin
 # Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,visualstudio,visualstudiocode,jetbrains+all,node,git,yarn
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,visualstudio,visualstudiocode,jetbrains+all,node,git,yarn
 
