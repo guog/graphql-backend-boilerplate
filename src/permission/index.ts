@@ -10,12 +10,15 @@ const permission = shield(permissions as any, {
   debug: NODE_ENV !== 'production',
   fallbackError: async (thrownThing, _parent, _args, _context, _info) => {
     if (thrownThing instanceof ApolloError) {
+      console.error('ApolloError')
       return thrownThing
     } else if (thrownThing instanceof Error) {
+      console.error('Error')
       console.error(thrownThing)
       // await Sentry.report(thrownThing)
       return new ApolloError('Internal server error', 'ERR_INTERNAL_SERVER')
     } else {
+      console.error('Error else')
       // what the hell got thrown
       // console.error('The resolver threw something that is not an error.')
       console.error(thrownThing)
