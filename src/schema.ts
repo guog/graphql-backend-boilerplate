@@ -23,10 +23,12 @@ const schema = makeSchema({
       '../node_modules/@types/nexus-typegen/index.d.ts'
     )
   },
-  contextType: {
-    module: path.join(__dirname, `context.${IsProductionMode ? 'js' : 'ts'}`),
-    export: 'Context'
-  }
+  contextType: !IsProductionMode
+    ? {
+        module: path.join(__dirname, 'context.ts'),
+        export: 'Context'
+      }
+    : undefined
 })
 
 export default schema
