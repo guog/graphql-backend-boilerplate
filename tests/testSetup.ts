@@ -32,8 +32,18 @@ beforeAll(async () => {
   await prisma.$executeRawUnsafe('DROP SCHEMA IF EXISTS test CASCADE')
   await prisma.$executeRawUnsafe('CREATE SCHEMA test')
 
-  execSync('npx prisma db push --accept-data-loss', { env: process.env })
-  execSync('npx prisma db seed', { env: process.env })
+  execSync('npx prisma db push --accept-data-loss', {
+    env: {
+      ...process.env,
+      DATABASE_URL
+    }
+  })
+  execSync('npx prisma db seed', {
+    env: {
+      ...process.env,
+      DATABASE_URL
+    }
+  })
 
   // Start server.
   const app: express.Application = createApp()
