@@ -16,20 +16,24 @@ import { getTestUtils, setTestUtils, TestUtils } from './testUtils'
 // @ts-ignore
 global.Headers = global.Headers || Headers
 
-const { APP_PORT = 5566, DATABASE_URL, APP_PATH = '/graphql/' } = process.env
-
+const {
+  APP_PORT = 5566,
+  DATABASE_URL = 'postgresql://test:test!@localhost:5432/test',
+  APP_PATH = '/graphql/'
+} = process.env
+process.env.DATABASE_URL = DATABASE_URL
 export const testSubscriptionHost = `ws://localhost:${APP_PORT}${APP_PATH}`
 export const testHost = `http://localhost:${APP_PORT}${APP_PATH}`
 
-assert(DATABASE_URL, 'Missing DATABASE_URL test environment varialbe.')
+// assert(DATABASE_URL, 'Missing DATABASE_URL test environment varialbe.')
 
 beforeAll(async () => {
   const prisma = new PrismaClient()
   await prisma.$executeRawUnsafe('DROP SCHEMA IF EXISTS test CASCADE')
   await prisma.$executeRawUnsafe('CREATE SCHEMA test')
 
-  execSync('yarn db-push:test', { env: process.env })
-  execSync('yarn db-seed:test', { env: process.env })
+  execSync('npx prisma db push --accept-data-loss', { env: process.env })
+  execSync('npx prisma db seed', { env: process.env })
 
   // Start server.
   const app: express.Application = createApp()

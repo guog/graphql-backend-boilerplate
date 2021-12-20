@@ -107,6 +107,6 @@
     "studio": "prisma studio",
     "db-seed:test": "dotenv -e ./.env.test -- prisma db seed",
     "db-push:test": "dotenv -e ./.env.test -- prisma db push --accept-data-loss",
-    "test": "dotenv -e ./.env.test -- jest --detectOpenHandles --runInBand"
+    "test": "dotenv -e ./.env.test -- jest --runInBand --coverage --detectOpenHandles --forceExit"
   }
 }

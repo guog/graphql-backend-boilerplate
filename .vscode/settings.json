@@ -12,8 +12,6 @@
     "**/.git": true,
     "**/.gitattributes": true,
     "**/.gitignore": true,
-    "**/.gitlab": true,
-    "**/.github": true,
     "**/.graphqlconfig.yml": true,
     "**/.hg": true,
     "**/.prettierignore": true,
