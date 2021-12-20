@@ -1,17 +1,17 @@
 import { Prisma, PrismaClient } from '@prisma/client'
-import { IsProductionMode } from './environment'
+import { IsDevelopmentMode } from './environment'
 import { InternalServerError } from './errors'
 
 function createPrismaClient(): PrismaClient {
   const prisma = new PrismaClient({
-    log: IsProductionMode
-      ? [{ emit: 'stdout', level: 'error' }]
-      : [
+    log: IsDevelopmentMode
+      ? [
           { emit: 'stdout', level: 'query' },
           { emit: 'stdout', level: 'info' },
           { emit: 'stdout', level: 'warn' },
           { emit: 'stdout', level: 'error' }
         ]
+      : [{ emit: 'stdout', level: 'error' }]
   })
 
   //! Specify soft deletion models here.
@@ -45,10 +45,6 @@ function createPrismaClient(): PrismaClient {
       const result = await next(params)
       return result
     } catch (err) {
-      console.error('v-----v')
-      console.error('Prisma Error:', new Date(), JSON.stringify(params))
-      console.error(err)
-      console.error('^-----^')
       if (err instanceof Prisma.PrismaClientKnownRequestError) {
         throw new InternalServerError('PrismaClientKnownRequestError', err.code)
       } else if (err instanceof Prisma.PrismaClientUnknownRequestError) {
