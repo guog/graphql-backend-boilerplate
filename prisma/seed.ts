@@ -17,6 +17,12 @@ async function main() {
         name: 'admin',
         password: await encryptPassword('admin'),
         nickName: 'admin'
+      },
+      {
+        name: 'disabledUser',
+        password: await encryptPassword('disabledUser'),
+        nickName: 'disabledUser',
+        disabled: true
       }
     ],
     skipDuplicates: true

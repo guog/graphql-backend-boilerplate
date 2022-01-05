@@ -1,46 +1,107 @@
+import ErrorDefine from '../../../src/errors/context'
+import { getTestUtils } from '../../testUtils'
 import {
+  changePasswordMutaion,
   signInMutation,
   signUpMutation,
-  changePasswordMutaion,
   updateProfileMutation
 } from './mutations'
 import { meQuery } from './queries'
 
-import { getTestUtils } from '../../testUtils'
-import { testHost } from '../../testSetup'
-
 export function Authentication(): void {
-  it('should signIn with admin', async () => {
-    const { graphqlClient, setAuthToken } = getTestUtils()
+  describe('Authentication - signIn', () => {
+    it(`should throw ${ErrorDefine.UserNotExist.message}`, async () => {
+      const { graphqlClient } = getTestUtils()
 
-    const variables = {
-      name: 'admin',
-      password: 'admin'
-    }
+      const variables = {
+        name: 'nobody',
+        password: 'nobody'
+      }
 
-    const response = await graphqlClient.request(signInMutation, variables)
+      expect(async () => {
+        await graphqlClient.request(signInMutation, variables)
+      }).rejects.toThrowError(ErrorDefine.UserNotExist.message)
+    })
 
-    expect(response).toHaveProperty('signIn')
-    expect(response.signIn).toHaveProperty('token')
+    it(`should throw ${ErrorDefine.PasswordIncorrect.message}`, async () => {
+      const { graphqlClient } = getTestUtils()
 
-    //! GQL client is replaced with authenticated one.
-    setAuthToken(response.signIn.token)
-  })
-  it('should signUp user', async () => {
-    const { graphqlClient } = getTestUtils()
-    const variables = {
-      data: { name: 'zhangsan', nickName: '张三', password: 'zhangsan' }
-    }
-    const response = await graphqlClient.request(signUpMutation, variables)
+      const variables = {
+        name: 'admin',
+        password: 'ErrorPassword'
+      }
 
-    expect(response).toHaveProperty('signUp')
-    expect(response.signUp).toHaveProperty('id')
-    expect(response.signUp).toHaveProperty('name')
-    expect(response.signUp.name).toEqual(variables.data.name)
-    expect(response.signUp.nickName).toEqual(variables.data.nickName)
+      expect(async () => {
+        await graphqlClient.request(signInMutation, variables)
+      }).rejects.toThrowError(ErrorDefine.PasswordIncorrect.message)
+    })
+
+    it(`should throw ${ErrorDefine.UserDisabled.message}`, async () => {
+      const { graphqlClient } = getTestUtils()
+
+      const variables = {
+        name: 'disabledUser',
+        password: 'disabledUser'
+      }
+
+      expect(async () => {
+        await graphqlClient.request(signInMutation, variables)
+      }).rejects.toThrowError(ErrorDefine.UserDisabled.message)
+    })
+
+    it(`should throw ${ErrorDefine.Unauthenticated.message}`, async () => {
+      const { graphqlClient } = getTestUtils()
+
+      expect(async () => {
+        await graphqlClient.request(meQuery)
+      }).rejects.toThrowError(ErrorDefine.Unauthenticated.message)
+    })
+
+    it('should signIn with admin', async () => {
+      const { graphqlClient, setAuthToken } = getTestUtils()
+
+      const variables = {
+        name: 'admin',
+        password: 'admin'
+      }
+
+      const response = await graphqlClient.request(signInMutation, variables)
+
+      expect(response).toHaveProperty('signIn')
+      expect(response.signIn).toHaveProperty('token')
+
+      //! GQL client is replaced with authenticated one.
+      setAuthToken(response.signIn.token)
+    })
   })
 
   describe('Resolver - after signIn', () => {
+    it(`should throw ${ErrorDefine.Unique.message} when signUp with admin`, async () => {
+      const { graphqlClient } = getTestUtils()
+
+      const variables = {
+        data: { name: 'admin', nickName: 'admin', password: 'admin' }
+      }
+
+      expect(async () => {
+        await graphqlClient.request(signUpMutation, variables)
+      }).rejects.toThrowError(ErrorDefine.Unique.message)
+    })
+
+    it('should signUp user', async () => {
+      const { graphqlClient } = getTestUtils()
+      const variables = {
+        data: { name: 'zhangsan', nickName: '张三', password: 'zhangsan' }
+      }
+      const response = await graphqlClient.request(signUpMutation, variables)
+
+      expect(response).toHaveProperty('signUp')
+      expect(response.signUp).toHaveProperty('id')
+      expect(response.signUp).toHaveProperty('name')
+      expect(response.signUp.name).toEqual(variables.data.name)
+      expect(response.signUp.nickName).toEqual(variables.data.nickName)
+    })
+
     const variables = {
       data: {
         nickName: 'NickName'
@@ -90,6 +151,21 @@ export function Authentication(): void {
       expect(response.me).toHaveProperty('updatedAt')
       expect(response.me).toHaveProperty('nickName')
       expect(response.me.nickName).toEqual(variables.data.nickName)
+    })
+
+    it('should change password admin', async () => {
+      const { graphqlClient } = getTestUtils()
+      const variables = {
+        password: 'admin',
+        newPassword: 'admin'
+      }
+      const response = await graphqlClient.request(
+        changePasswordMutaion,
+        variables
+      )
+
+      expect(response).toHaveProperty('changePassword')
+      expect(response.changePassword).toHaveProperty('token')
     })
   })
 }
