@@ -1,5 +1,7 @@
 # Quickly GraphQL Server
 
+[![codecov](https://codecov.io/gh/guog/graphql-backend-boilerplate/branch/main/graph/badge.svg?token=TBEIZJKUFJ)](https://codecov.io/gh/guog/graphql-backend-boilerplate)
+
 Use TypeScript to quickly build a GraphQL server, especially for CRUD functions, almost without writing code.
 
 Minimal code, flexible CRUD API.
