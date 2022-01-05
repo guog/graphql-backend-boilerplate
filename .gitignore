@@ -1,8 +1,3 @@
-.generated/*
-prisma/migrations/*
-db/*
-!db/.gitkeep
-bin
 # Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,visualstudio,visualstudiocode,jetbrains+all,node,git,yarn
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,visualstudio,visualstudiocode,jetbrains+all,node,git,yarn
 
@@ -717,3 +712,10 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,macos,visualstudio,visualstudiocode,jetbrains+all,node,git,yarn
+
+.generated/*
+prisma/migrations/*
+db/*
+!db/.gitkeep
+bin
+!.env.test

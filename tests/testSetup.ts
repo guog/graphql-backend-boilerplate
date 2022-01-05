@@ -16,16 +16,12 @@ import { getTestUtils, setTestUtils, TestUtils } from './testUtils'
 // @ts-ignore
 global.Headers = global.Headers || Headers
 
-const {
-  APP_PORT = 5566,
-  DATABASE_URL = 'postgresql://test:test!@localhost:5432/test',
-  APP_PATH = '/graphql/'
-} = process.env
-process.env.DATABASE_URL = DATABASE_URL
+const { APP_PORT = 5566, DATABASE_URL, APP_PATH } = process.env
 export const testSubscriptionHost = `ws://localhost:${APP_PORT}${APP_PATH}`
 export const testHost = `http://localhost:${APP_PORT}${APP_PATH}`
 
-// assert(DATABASE_URL, 'Missing DATABASE_URL test environment varialbe.')
+assert(DATABASE_URL, 'Missing DATABASE_URL test environment varialbe.')
+assert(APP_PATH, 'Missing APP_PATH test environment varialbe.')
 
 beforeAll(async () => {
   const prisma = new PrismaClient()
