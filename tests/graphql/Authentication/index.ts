@@ -123,21 +123,6 @@ export function Authentication(): void {
       expect(response.updateProfile.nickName).toEqual(variables.data.nickName)
     })
 
-    /* it('should throw error when invalid gender value is given', async () => {
-      const { graphqlClient } = getTestUtils()
-
-      const vars = {
-        user: {
-          name: 'HelloBro',
-          gender: 'invalid'
-        }
-      }
-
-      expect(async () => {
-        await graphqlClient.request(updateProfileMutation, vars)
-      }).rejects.toThrow()
-    }) */
-
     it('should query me and get updated nickName', async () => {
       const { graphqlClient } = getTestUtils()
       const response = await graphqlClient.request(meQuery)
@@ -151,6 +136,19 @@ export function Authentication(): void {
       expect(response.me).toHaveProperty('updatedAt')
       expect(response.me).toHaveProperty('nickName')
       expect(response.me.nickName).toEqual(variables.data.nickName)
+    })
+
+    it(`should throw ${ErrorDefine.PasswordIncorrect.message}`, async () => {
+      const { graphqlClient } = getTestUtils()
+
+      const variables = {
+        password: 'errorPassword',
+        newPassword: 'admin'
+      }
+
+      expect(async () => {
+        await graphqlClient.request(changePasswordMutaion, variables)
+      }).rejects.toThrowError(ErrorDefine.PasswordIncorrect.message)
     })
 
     it('should change password admin', async () => {
