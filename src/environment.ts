@@ -33,3 +33,21 @@ export const IsProductionMode = process.env.NODE_ENV === 'production'
 export const IsDevelopmentMode = process.env.NODE_ENV === 'development'
 
 export const APP_SHIELD_DISABLED = process.env.APP_SHIELD_DISABLED === 'true'
+
+/**
+ * If "true" submit audit reports
+ */
+export const APP_AUDIT_DISABLED = process.env.APP_AUDIT_DISABLED === 'true'
+
+/**
+ * What level of audit logs to report.
+ * values: null, "info", "low", "moderate", "high", "critical", or "none"
+ */
+export const APP_AUDIT_LEVEL = process.env.APP_AUDIT_LEVEL || ''
+
+/**
+ * What level of logs to report.
+ * The default is "warn".
+ * values: "silent", "error", "warn", "notice", "http", "timing", "info", "verbose", or "silly"
+ */
+export const APP_LOG_LEVEL = process.env.APP_LOG_LEVEL || 'warn'
