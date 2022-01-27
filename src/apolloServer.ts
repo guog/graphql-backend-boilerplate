@@ -10,10 +10,12 @@ import { ApolloServer } from 'apollo-server-express'
 import { Application } from 'express'
 import { applyMiddleware } from 'graphql-middleware'
 import http from 'http'
-import { createContext } from './context'
+import { createContext, type Context } from './context'
 import { APP_PATH, APP_SHIELD_DISABLED, IsProductionMode } from './environment'
 import permission from './permission'
+import { ApolloServerPluginLogger } from './plugins'
 import schema from './schema'
+import logger from './winstonLogger'
 
 const schemaWithMiddleware = applyMiddleware(
   schema,
@@ -27,6 +29,7 @@ export function createApolloServer(httpServer: http.Server) {
     introspection: !IsProductionMode,
     debug: !IsProductionMode,
     persistedQueries: false,
+    logger,
     plugins: [
       ApolloServerPluginDrainHttpServer({
         httpServer,
@@ -37,7 +40,8 @@ export function createApolloServer(httpServer: http.Server) {
       IsProductionMode
         ? ApolloServerPluginInlineTraceDisabled()
         : ApolloServerPluginInlineTrace(),
-      ApolloServerPluginLandingPageDisabled()
+      ApolloServerPluginLandingPageDisabled(),
+      ApolloServerPluginLogger<Context>({ logger })
       /* IsProductionMode
         ? ApolloServerPluginLandingPageDisabled()
         : ApolloServerPluginLandingPageLocalDefault() */
