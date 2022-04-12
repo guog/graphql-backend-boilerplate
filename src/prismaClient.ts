@@ -1,17 +1,18 @@
 import { Prisma, PrismaClient } from '@prisma/client'
+import ms from 'ms'
 import { IsDevelopmentMode } from './environment'
 import { InternalServerError } from './errors'
+import logger from './winstonLogger'
 
 function createPrismaClient(): PrismaClient {
+  const prismaLogger = logger.child({ source: 'PrismaClient' })
   const prisma = new PrismaClient({
-    log: IsDevelopmentMode
-      ? [
-          { emit: 'stdout', level: 'query' },
-          { emit: 'stdout', level: 'info' },
-          { emit: 'stdout', level: 'warn' },
-          { emit: 'stdout', level: 'error' }
-        ]
-      : [{ emit: 'stdout', level: 'error' }]
+    log: [
+      { emit: 'event', level: 'query' },
+      { emit: 'event', level: 'info' },
+      { emit: 'event', level: 'warn' },
+      { emit: 'event', level: 'error' }
+    ]
   })
 
   //! Specify soft deletion models here.
@@ -39,6 +40,42 @@ function createPrismaClient(): PrismaClient {
   //   return next(params);
   // });
 
+  //const outputLog=(e:)
+
+  const createLogObj = (e: {
+    timestamp?: Date
+    target?: string
+    params?: string
+    duration?: number
+    message?: string
+  }) => {
+    return {
+      // 有些timestamp传的值为数字,即1970年以来的秒
+      timestamp:
+        e.timestamp && e.timestamp.toISOString
+          ? e.timestamp.toISOString()
+          : e.timestamp,
+      target: e.target,
+      duration: e.duration ? ms(e.duration, { long: true }) : undefined,
+      params: e.params
+    }
+  }
+
+  prisma.$on('query', e => {
+    prismaLogger.debug(e.query, createLogObj(e))
+  })
+
+  prisma.$on('info', e => {
+    prismaLogger.info(e.message, createLogObj(e))
+  })
+
+  prisma.$on('warn', e => {
+    prismaLogger.warn(e.message, createLogObj(e))
+  })
+
+  prisma.$on('error', e => {
+    prismaLogger.error(e.message, createLogObj(e))
+  })
   //! global prisma error handle
   prisma.$use(async (params, next) => {
     try {

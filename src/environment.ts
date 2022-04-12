@@ -48,6 +48,6 @@ export const APP_AUDIT_LEVEL = process.env.APP_AUDIT_LEVEL || ''
 /**
  * What level of logs to report.
  * The default is "warn".
- * values: "silent", "error", "warn", "notice", "http", "timing", "info", "verbose", or "silly"
+ * values: "error", "warn", "info", "http", "verbose", "debug", or "silly"
  */
-export const APP_LOG_LEVEL = process.env.APP_LOG_LEVEL || 'warn'
+export const APP_LOG_LEVEL = process.env.APP_LOG_LEVEL || 'debug'
