@@ -149,17 +149,6 @@ input NestedIntFilter {
   notIn: [Int]
 }
 
-input NestedIntNullableFilter {
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int]
-  lt: Int
-  lte: Int
-  not: NestedIntNullableFilter
-  notIn: [Int]
-}
-
 input NestedStringFilter {
   contains: String
   endsWith: String
@@ -170,37 +159,6 @@ input NestedStringFilter {
   lt: String
   lte: String
   not: NestedStringFilter
-  notIn: [String]
-  startsWith: String
-}
-
-input NestedStringNullableFilter {
-  contains: String
-  endsWith: String
-  equals: String
-  gt: String
-  gte: String
-  in: [String]
-  lt: String
-  lte: String
-  not: NestedStringNullableFilter
-  notIn: [String]
-  startsWith: String
-}
-
-input NestedStringNullableWithAggregatesFilter {
-  _count: NestedIntNullableFilter
-  _max: NestedStringNullableFilter
-  _min: NestedStringNullableFilter
-  contains: String
-  endsWith: String
-  equals: String
-  gt: String
-  gte: String
-  in: [String]
-  lt: String
-  lte: String
-  not: NestedStringNullableWithAggregatesFilter
   notIn: [String]
   startsWith: String
 }
@@ -220,10 +178,6 @@ input NestedStringWithAggregatesFilter {
   not: NestedStringWithAggregatesFilter
   notIn: [String]
   startsWith: String
-}
-
-input NullableStringFieldUpdateOperationsInput {
-  set: String
 }
 
 type Query {
@@ -263,39 +217,6 @@ input StringFilter {
   lte: String
   mode: QueryMode
   not: NestedStringFilter
-  notIn: [String]
-  startsWith: String
-}
-
-input StringNullableFilter {
-  contains: String
-  endsWith: String
-  equals: String
-  gt: String
-  gte: String
-  in: [String]
-  lt: String
-  lte: String
-  mode: QueryMode
-  not: NestedStringNullableFilter
-  notIn: [String]
-  startsWith: String
-}
-
-input StringNullableWithAggregatesFilter {
-  _count: NestedIntNullableFilter
-  _max: NestedStringNullableFilter
-  _min: NestedStringNullableFilter
-  contains: String
-  endsWith: String
-  equals: String
-  gt: String
-  gte: String
-  in: [String]
-  lt: String
-  lte: String
-  mode: QueryMode
-  not: NestedStringNullableWithAggregatesFilter
   notIn: [String]
   startsWith: String
 }
