@@ -9,18 +9,19 @@ export interface Context {
   select: any
   req: Request
   res: Response
-  user?: User
+  user: User | null
+  shield: boolean
 }
 
 export async function createContext(params: {
   req: Request
   res: Response
-  /* connection?: unknown */
+  connection?: unknown
 }): Promise<Context> {
   const { req, res } = params
-
+  const shield = !APP_SHIELD_DISABLED
   const user =
-    req?.body?.operationName !== 'IntrospectionQuery' && !APP_SHIELD_DISABLED
+    req?.body?.operationName !== 'IntrospectionQuery' && shield
       ? await createContextUser(req)
       : null
 
@@ -29,6 +30,7 @@ export async function createContext(params: {
     res,
     req,
     user,
+    shield,
     select: {}
   }
 }

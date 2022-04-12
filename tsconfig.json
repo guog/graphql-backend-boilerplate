@@ -3,7 +3,7 @@
   "compilerOptions": {
     "alwaysStrict": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext"],
     "module": "CommonJS",
     "moduleResolution": "node",
     "noImplicitAny": true,
@@ -16,8 +16,8 @@
     "strict": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
-    "strictNullChecks": false,
-    "target": "ES2018"
+    "strictNullChecks": true,
+    "target": "ES2020"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "tests/**/*"]

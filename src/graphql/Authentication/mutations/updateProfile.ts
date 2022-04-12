@@ -1,4 +1,3 @@
-import { isEmpty } from 'lodash'
 import { mutationField, nonNull } from 'nexus'
 import { AuthenticationError } from '../../../errors'
 
@@ -8,7 +7,7 @@ export const updateProfileMutation = mutationField('updateProfile', {
     data: nonNull('UpdateProfileInput')
   },
   resolve(_parent, { data }, { prisma, user, select }) {
-    if (isEmpty(user)) {
+    if (!user) {
       throw new AuthenticationError()
     }
     return prisma.user.update({

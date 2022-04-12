@@ -12,8 +12,8 @@ export const APP_SECRET = process.env.APP_SECRET || 'MySecret'
  * service port
  */
 export const APP_PORT =
-  typeof process.env.PORT === 'string'
-    ? parseInt(process.env.PORT, 10)
+  typeof process.env.APP_PORT === 'string'
+    ? parseInt(process.env.APP_PORT, 10)
     : process.env.NODE_ENV === 'production'
     ? 8080
     : 4000

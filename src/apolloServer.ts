@@ -17,10 +17,9 @@ import { ApolloServerPluginLogger } from './plugins'
 import schema from './schema'
 import logger from './winstonLogger'
 
-const schemaWithMiddleware = applyMiddleware(
-  schema,
-  APP_SHIELD_DISABLED ? undefined : permission
-)
+const schemaWithMiddleware = APP_SHIELD_DISABLED
+  ? applyMiddleware(schema)
+  : applyMiddleware(schema, permission)
 
 export function createApolloServer(httpServer: http.Server) {
   return new ApolloServer({

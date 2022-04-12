@@ -1,4 +1,3 @@
-import { isEmpty } from 'lodash'
 import { mutationField, nonNull, stringArg } from 'nexus'
 import { AuthenticationError, PasswordIncorrectError } from '../../../errors'
 import {
@@ -23,7 +22,7 @@ export const ChangePasswordMutation = mutationField('changePassword', {
     )
   },
   async resolve(_parent, { password, newPassword }, { prisma, user }, _info) {
-    if (isEmpty(user)) {
+    if (!user) {
       throw new AuthenticationError()
     }
 
