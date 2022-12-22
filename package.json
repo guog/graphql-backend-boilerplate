@@ -76,7 +76,7 @@
     "graphql-middleware": "^6.1.22",
     "graphql-shield": "^7.5.0",
     "i18next": "^21.6.16",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "lru-cache": "^7.8.1",
     "ms": "^2.1.3",
