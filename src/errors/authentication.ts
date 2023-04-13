@@ -1,4 +1,4 @@
-import { ApolloError } from 'apollo-server-express'
+import { GraphQLError } from 'graphql'
 import eds from './context'
 
 /**
@@ -45,14 +45,13 @@ export interface UserFrozenErrorArg extends PasswordIncorrectErrorArg {
  *
  * @export
  * @class SignInFailureError
- * @extends {ApolloError}
+ * @extends {GraphQLError}
  */
-export class SignInFailureError extends ApolloError {
+export class SignInFailureError extends GraphQLError {
   constructor() {
-    super(eds.SignInFailure.message, eds.SignInFailure.code, {
-      timestamp: new Date()
+    super(eds.SignInFailure.message, {
+      extensions: { code: eds.SignInFailure.code, timestamp: new Date() }
     })
-
     Object.defineProperty(this, 'name', { value: 'SignInFailureError' })
   }
 }
@@ -62,13 +61,12 @@ export class SignInFailureError extends ApolloError {
  *
  * @export
  * @class PasswordIncorrectError
- * @extends {ApolloError}
+ * @extends {GraphQLError}
  */
-export class PasswordIncorrectError extends ApolloError {
+export class PasswordIncorrectError extends GraphQLError {
   constructor(payload?: PasswordIncorrectErrorArg) {
-    super(eds.PasswordIncorrect.message, eds.PasswordIncorrect.code, {
-      timestamp: new Date(),
-      payload
+    super(eds.PasswordIncorrect.message, {
+      extensions: { code: eds.PasswordIncorrect.code, timestamp: new Date() }
     })
 
     Object.defineProperty(this, 'name', {
@@ -82,12 +80,12 @@ export class PasswordIncorrectError extends ApolloError {
  *
  * @export
  * @class UserDisabledError
- * @extends {ApolloError}
+ * @extends {GraphQLError}
  */
-export class UserDisabledError extends ApolloError {
+export class UserDisabledError extends GraphQLError {
   constructor() {
-    super(eds.UserDisabled.message, eds.UserDisabled.code, {
-      timestamp: new Date()
+    super(eds.UserDisabled.message, {
+      extensions: { code: eds.UserDisabled.code, timestamp: new Date() }
     })
     Object.defineProperty(this, 'name', {
       value: 'UserDisabledError'
@@ -100,13 +98,12 @@ export class UserDisabledError extends ApolloError {
  *
  * @export
  * @class UserFrozenError
- * @extends {ApolloError}
+ * @extends {GraphQLError}
  */
-export class UserFrozenError extends ApolloError {
+export class UserFrozenError extends GraphQLError {
   constructor(payload: UserFrozenErrorArg) {
-    super(eds.UserFrozen.message, eds.UserFrozen.code, {
-      timestamp: new Date(),
-      payload
+    super(eds.UserFrozen.message, {
+      extensions: { code: eds.UserFrozen.code, timestamp: new Date() }
     })
 
     Object.defineProperty(this, 'name', {
@@ -120,42 +117,42 @@ export class UserFrozenError extends ApolloError {
  *
  * @export
  * @class UserNotExistError
- * @extends {ApolloError}
+ * @extends {GraphQLError}
  */
-export class UserNotExistError extends ApolloError {
+export class UserNotExistError extends GraphQLError {
   constructor() {
-    super(eds.UserNotExist.message, eds.UserNotExist.code, {
-      timestamp: new Date()
+    super(eds.UserNotExist.message, {
+      extensions: { code: eds.UserNotExist.code, timestamp: new Date() }
     })
 
     Object.defineProperty(this, 'name', { value: 'UserNotExistError' })
   }
 }
 
-export class AuthenticationError extends ApolloError {
+export class AuthenticationError extends GraphQLError {
   constructor() {
-    super(eds.Unauthenticated.message, eds.Unauthenticated.code, {
-      timestamp: new Date()
+    super(eds.Unauthenticated.message, {
+      extensions: { code: eds.Unauthenticated.code, timestamp: new Date() }
     })
 
     Object.defineProperty(this, 'name', { value: 'AuthenticationError' })
   }
 }
 
-export class ForbiddenError extends ApolloError {
+export class ForbiddenError extends GraphQLError {
   constructor() {
-    super(eds.Forbidden.message, eds.Forbidden.code, {
-      timestamp: new Date()
+    super(eds.Forbidden.message, {
+      extensions: { code: eds.Forbidden.code, timestamp: new Date() }
     })
 
     Object.defineProperty(this, 'name', { value: 'ForbiddenError' })
   }
 }
 
-export class InvalidTokenError extends ApolloError {
+export class InvalidTokenError extends GraphQLError {
   constructor() {
-    super(eds.InvalidToken.message, eds.InvalidToken.code, {
-      timestamp: new Date()
+    super(eds.InvalidToken.message, {
+      extensions: { code: eds.InvalidToken.code, timestamp: new Date() }
     })
 
     Object.defineProperty(this, 'name', { value: 'InvalidTokenError' })

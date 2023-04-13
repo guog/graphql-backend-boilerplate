@@ -3,8 +3,9 @@ import type { Request, Response } from 'express'
 import { APP_SHIELD_DISABLED } from './environment'
 import prisma from './prismaClient'
 import { createContextUser } from './utils/auth'
+import { type BaseContext } from '@apollo/server'
 
-export interface Context {
+export interface Context extends BaseContext {
   prisma: PrismaClient
   select: any
   req: Request

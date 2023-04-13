@@ -3,7 +3,7 @@ import type {
   BaseContext,
   GraphQLRequestListener,
   GraphQLServerListener
-} from 'apollo-server-plugin-base'
+} from '@apollo/server'
 import { nanoid } from 'nanoid'
 import winston, { type Logger } from 'winston'
 
@@ -154,7 +154,7 @@ export function ApolloServerPluginLogger<
           childLogger.debug(`resolve operation`, {
             event: 'didResolveOperation',
             operationName: requestContext.operationName,
-            operation: requestContext.operation.operation
+            operation: requestContext.operation?.operation
           })
         },
         async responseForOperation(requestContext) {
@@ -222,7 +222,7 @@ export function ApolloServerPluginLogger<
         async willSendResponse(willSendResponse) {
           childLogger.debug(`will send response`, {
             event: 'willSendResponse',
-            data: willSendResponse.response.data,
+            data: willSendResponse.response.body,
             metrics: willSendResponse.metrics
           })
         }

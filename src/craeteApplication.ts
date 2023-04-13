@@ -2,6 +2,7 @@ import { altairExpress } from 'altair-express-middleware'
 import cors from 'cors'
 import express from 'express'
 import { APP_PATH } from './environment'
+import { json } from 'body-parser'
 
 const initialQuery = `mutation {
   signIn(name: "admin", password: "admin") {
@@ -24,18 +25,20 @@ function createApp() {
   app.engine('html', ejs.renderFile)
   app.set('view engine', 'html') */
 
-  app.use(
+  /* app.use(
     `${APP_PATH}`,
+    cors<cors.CorsRequest>,
+    json(),
     altairExpress({
-      /*
+
       initialSettings: {
         language: 'zh-CN'
-      }, */
+      },
       endpointURL: `${APP_PATH}`,
       //subscriptionsEndpoint: `ws://localhost:4000/subscriptions`,
       initialQuery
     })
-  )
+  ) */
 
   return app
 }
