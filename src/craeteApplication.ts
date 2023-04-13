@@ -13,9 +13,9 @@ const initialQuery = `mutation {
 function createApp() {
   const app = express()
 
-  app.use(cors())
+  /* app.use(cors())
   app.set('trust proxy', true)
-  app.use(express.json({ type: 'application/json', limit: '10MB' }))
+  app.use(express.json({ type: 'application/json', limit: '10MB' })) */
 
   /* app.get('/', (req, res) => {
     res.send('It works - ver. 0.0.1')
