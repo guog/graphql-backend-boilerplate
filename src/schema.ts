@@ -7,15 +7,7 @@ import * as types from './graphql'
 
 const schema = makeSchema({
   types,
-  plugins: [
-    validatePlugin(),
-    paljs({
-      excludeFields: ['password'],
-      filterInputs: input =>
-        input.fields.filter(field => field.name !== 'passowrd')
-    }),
-    queryComplexityPlugin()
-  ],
+  plugins: [validatePlugin(), paljs(), queryComplexityPlugin()],
   outputs: {
     schema: path.join(__dirname, '../schema.graphql'),
     typegen: path.join(
