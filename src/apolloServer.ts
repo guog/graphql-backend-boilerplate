@@ -28,9 +28,7 @@ const schemaWithMiddleware = APP_SHIELD_DISABLED
 export function createApolloServer(httpServer: http.Server) {
   return new ApolloServer<Context>({
     schema: schemaWithMiddleware,
-    //context: createContext,
     introspection: !IsProductionMode,
-    //debug: !IsProductionMode,
     persistedQueries: false,
     includeStacktraceInErrorResponses: !IsProductionMode,
     logger,
@@ -44,8 +42,8 @@ export function createApolloServer(httpServer: http.Server) {
       IsProductionMode
         ? ApolloServerPluginInlineTraceDisabled()
         : ApolloServerPluginInlineTrace(),
-      ApolloServerPluginLandingPageDisabled(),
-      ApolloServerPluginLogger<Context>({ logger })
+      ApolloServerPluginLogger<Context>({ logger }),
+      ApolloServerPluginLandingPageDisabled()
       /* IsProductionMode
         ? ApolloServerPluginLandingPageDisabled()
         : ApolloServerPluginLandingPageLocalDefault() */
