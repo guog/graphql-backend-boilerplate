@@ -28,8 +28,7 @@
   "private": true,
   "engines": {
     "node": ">=16.10.0",
-    "npm": ">=8.0.0",
-    "yarn": "^1.22.4"
+    "pnpm": ">=8"
   },
   "devDependencies": {
     "@paljs/cli": "^5.3.0",
@@ -97,14 +96,14 @@
     "start": "node dist",
     "dev": "ts-node-dev --respawn --transpile-only --files src/index.ts",
     "clean": "rm -rf dist/* bin/*",
-    "build": "yarn clean && yarn generate && tsc",
+    "build": "pnpm run clean && pnpm run generate && tsc",
     "build:pkg": "rm -rf dist/* bin/* && prisma generate && tsc && node scripts/pre-pkg.js && pkg --compress GZip .",
     "format": "prettier --write --ignore-unknown './src/**/*.{ts,md}'",
     "generate:code": "rm -rf ./.generated && pal g && prettier --write './.generated/**/*.ts'",
-    "generate": "yarn generate:prisma && yarn generate:nexus",
+    "generate": "pnpm run generate:prisma && pnpm run generate:nexus",
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only src/schema",
-    "postinstall": "yarn generate",
+    "postinstall": "pnpm run generate",
     "db-push": "prisma db push",
     "db-seed": "prisma db seed",
     "studio": "prisma studio",
