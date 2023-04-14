@@ -54,6 +54,7 @@
     "pkg": "^5.6.0",
     "prettier": "^2.6.2",
     "prisma": "^4.12.0",
+    "rimraf": "^5.0.0",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
@@ -95,7 +96,7 @@
   "scripts": {
     "start": "node dist",
     "dev": "ts-node-dev --respawn --transpile-only --files src/index.ts",
-    "clean": "rm -rf dist/* bin/*",
+    "clean": "rimraf -rf dist/* bin/*",
     "build": "pnpm run clean && pnpm run generate && tsc",
     "build:pkg": "rm -rf dist/* bin/* && prisma generate && tsc && node scripts/pre-pkg.js && pkg --compress GZip .",
     "format": "prettier --write --ignore-unknown './src/**/*.{ts,md}'",
