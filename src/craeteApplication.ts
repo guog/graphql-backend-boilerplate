@@ -1,6 +1,7 @@
 import { altairExpress } from 'altair-express-middleware'
 import cors from 'cors'
 import express from 'express'
+import { type Express } from 'express'
 import { APP_PATH } from './environment'
 import { json } from 'body-parser'
 
@@ -10,7 +11,7 @@ const initialQuery = `mutation {
   }
 }`
 
-function createApp() {
+function createApp(): Express {
   const app = express()
 
   /* app.use(cors())
