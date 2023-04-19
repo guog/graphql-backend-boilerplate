@@ -2,6 +2,14 @@
 ### Do not make changes to this file directly
 
 
+type AggregateFieldDemo {
+  _avg: FieldDemoAvgAggregateOutputType
+  _count: FieldDemoCountAggregateOutputType
+  _max: FieldDemoMaxAggregateOutputType
+  _min: FieldDemoMinAggregateOutputType
+  _sum: FieldDemoSumAggregateOutputType
+}
+
 type AggregateUser {
   _count: UserCountAggregateOutputType
   _max: UserMaxAggregateOutputType
@@ -24,6 +32,33 @@ The `BigInt` scalar type represents non-fractional signed whole numeric values.
 """
 scalar BigInt
 
+input BigIntNullableFilter {
+  equals: BigInt
+  gt: BigInt
+  gte: BigInt
+  in: [BigInt]
+  lt: BigInt
+  lte: BigInt
+  not: NestedBigIntNullableFilter
+  notIn: [BigInt]
+}
+
+input BigIntNullableWithAggregatesFilter {
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedBigIntNullableFilter
+  _min: NestedBigIntNullableFilter
+  _sum: NestedBigIntNullableFilter
+  equals: BigInt
+  gt: BigInt
+  gte: BigInt
+  in: [BigInt]
+  lt: BigInt
+  lte: BigInt
+  not: NestedBigIntNullableWithAggregatesFilter
+  notIn: [BigInt]
+}
+
 input BoolFieldUpdateOperationsInput {
   set: Boolean
 }
@@ -31,6 +66,19 @@ input BoolFieldUpdateOperationsInput {
 input BoolFilter {
   equals: Boolean
   not: NestedBoolFilter
+}
+
+input BoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+input BoolNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedBoolNullableFilter
+  _min: NestedBoolNullableFilter
+  equals: Boolean
+  not: NestedBoolNullableWithAggregatesFilter
 }
 
 input BoolWithAggregatesFilter {
@@ -43,6 +91,23 @@ input BoolWithAggregatesFilter {
 
 """The `Byte` scalar type represents byte value as a Buffer"""
 scalar Bytes
+
+input BytesNullableFilter {
+  equals: Bytes
+  in: [Bytes]
+  not: NestedBytesNullableFilter
+  notIn: [Bytes]
+}
+
+input BytesNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedBytesNullableFilter
+  _min: NestedBytesNullableFilter
+  equals: Bytes
+  in: [Bytes]
+  not: NestedBytesNullableWithAggregatesFilter
+  notIn: [Bytes]
+}
 
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
@@ -64,6 +129,31 @@ input DateTimeFilter {
   notIn: [DateTime]
 }
 
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime]
+}
+
+input DateTimeNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedDateTimeNullableFilter
+  _min: NestedDateTimeNullableFilter
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableWithAggregatesFilter
+  notIn: [DateTime]
+}
+
 input DateTimeWithAggregatesFilter {
   _count: NestedIntFilter
   _max: NestedDateTimeFilter
@@ -81,10 +171,419 @@ input DateTimeWithAggregatesFilter {
 """An arbitrary-precision Decimal type"""
 scalar Decimal
 
+input DecimalNullableFilter {
+  equals: Decimal
+  gt: Decimal
+  gte: Decimal
+  in: [Decimal]
+  lt: Decimal
+  lte: Decimal
+  not: NestedDecimalNullableFilter
+  notIn: [Decimal]
+}
+
+input DecimalNullableWithAggregatesFilter {
+  _avg: NestedDecimalNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedDecimalNullableFilter
+  _min: NestedDecimalNullableFilter
+  _sum: NestedDecimalNullableFilter
+  equals: Decimal
+  gt: Decimal
+  gte: Decimal
+  in: [Decimal]
+  lt: Decimal
+  lte: Decimal
+  not: NestedDecimalNullableWithAggregatesFilter
+  notIn: [Decimal]
+}
+
+type FieldDemo {
+  id: String!
+  theBigInt: BigInt
+  theBoolean: Boolean
+  theBytes: Bytes
+  theDateTime: DateTime
+  theDecimal: Decimal
+  theFloat: Float
+  theInt: Int
+  theJson: Json
+  theString: String
+}
+
+type FieldDemoAvgAggregateOutputType {
+  theBigInt: Float
+  theDecimal: Decimal
+  theFloat: Float
+  theInt: Float
+}
+
+input FieldDemoAvgOrderByAggregateInput {
+  theBigInt: SortOrder
+  theDecimal: SortOrder
+  theFloat: SortOrder
+  theInt: SortOrder
+}
+
+type FieldDemoCountAggregateOutputType {
+  _all: Int!
+  id: Int!
+  theBigInt: Int!
+  theBoolean: Int!
+  theBytes: Int!
+  theDateTime: Int!
+  theDecimal: Int!
+  theFloat: Int!
+  theInt: Int!
+  theJson: Int!
+  theString: Int!
+}
+
+input FieldDemoCountOrderByAggregateInput {
+  id: SortOrder
+  theBigInt: SortOrder
+  theBoolean: SortOrder
+  theBytes: SortOrder
+  theDateTime: SortOrder
+  theDecimal: SortOrder
+  theFloat: SortOrder
+  theInt: SortOrder
+  theJson: SortOrder
+  theString: SortOrder
+}
+
+input FieldDemoCreateInput {
+  id: String
+  theBigInt: BigInt
+  theBoolean: Boolean
+  theBytes: Bytes
+  theDateTime: DateTime
+  theDecimal: Decimal
+  theFloat: Float
+  theInt: Int
+  theJson: Json
+  theString: String
+}
+
+input FieldDemoCreateManyInput {
+  id: String
+  theBigInt: BigInt
+  theBoolean: Boolean
+  theBytes: Bytes
+  theDateTime: DateTime
+  theDecimal: Decimal
+  theFloat: Float
+  theInt: Int
+  theJson: Json
+  theString: String
+}
+
+type FieldDemoMaxAggregateOutputType {
+  id: String
+  theBigInt: BigInt
+  theBoolean: Boolean
+  theBytes: Bytes
+  theDateTime: DateTime
+  theDecimal: Decimal
+  theFloat: Float
+  theInt: Int
+  theString: String
+}
+
+input FieldDemoMaxOrderByAggregateInput {
+  id: SortOrder
+  theBigInt: SortOrder
+  theBoolean: SortOrder
+  theBytes: SortOrder
+  theDateTime: SortOrder
+  theDecimal: SortOrder
+  theFloat: SortOrder
+  theInt: SortOrder
+  theString: SortOrder
+}
+
+type FieldDemoMinAggregateOutputType {
+  id: String
+  theBigInt: BigInt
+  theBoolean: Boolean
+  theBytes: Bytes
+  theDateTime: DateTime
+  theDecimal: Decimal
+  theFloat: Float
+  theInt: Int
+  theString: String
+}
+
+input FieldDemoMinOrderByAggregateInput {
+  id: SortOrder
+  theBigInt: SortOrder
+  theBoolean: SortOrder
+  theBytes: SortOrder
+  theDateTime: SortOrder
+  theDecimal: SortOrder
+  theFloat: SortOrder
+  theInt: SortOrder
+  theString: SortOrder
+}
+
+input FieldDemoOrderByWithAggregationInput {
+  _avg: FieldDemoAvgOrderByAggregateInput
+  _count: FieldDemoCountOrderByAggregateInput
+  _max: FieldDemoMaxOrderByAggregateInput
+  _min: FieldDemoMinOrderByAggregateInput
+  _sum: FieldDemoSumOrderByAggregateInput
+  id: SortOrder
+  theBigInt: SortOrder
+  theBoolean: SortOrder
+  theBytes: SortOrder
+  theDateTime: SortOrder
+  theDecimal: SortOrder
+  theFloat: SortOrder
+  theInt: SortOrder
+  theJson: SortOrder
+  theString: SortOrder
+}
+
+input FieldDemoOrderByWithRelationInput {
+  id: SortOrder
+  theBigInt: SortOrder
+  theBoolean: SortOrder
+  theBytes: SortOrder
+  theDateTime: SortOrder
+  theDecimal: SortOrder
+  theFloat: SortOrder
+  theInt: SortOrder
+  theJson: SortOrder
+  theString: SortOrder
+}
+
+enum FieldDemoScalarFieldEnum {
+  id
+  theBigInt
+  theBoolean
+  theBytes
+  theDateTime
+  theDecimal
+  theFloat
+  theInt
+  theJson
+  theString
+}
+
+input FieldDemoScalarWhereWithAggregatesInput {
+  AND: [FieldDemoScalarWhereWithAggregatesInput]
+  NOT: [FieldDemoScalarWhereWithAggregatesInput]
+  OR: [FieldDemoScalarWhereWithAggregatesInput]
+  id: StringWithAggregatesFilter
+  theBigInt: BigIntNullableWithAggregatesFilter
+  theBoolean: BoolNullableWithAggregatesFilter
+  theBytes: BytesNullableWithAggregatesFilter
+  theDateTime: DateTimeNullableWithAggregatesFilter
+  theDecimal: DecimalNullableWithAggregatesFilter
+  theFloat: FloatNullableWithAggregatesFilter
+  theInt: IntNullableWithAggregatesFilter
+  theJson: JsonNullableWithAggregatesFilter
+  theString: StringNullableWithAggregatesFilter
+}
+
+type FieldDemoSumAggregateOutputType {
+  theBigInt: BigInt
+  theDecimal: Decimal
+  theFloat: Float
+  theInt: Int
+}
+
+input FieldDemoSumOrderByAggregateInput {
+  theBigInt: SortOrder
+  theDecimal: SortOrder
+  theFloat: SortOrder
+  theInt: SortOrder
+}
+
+input FieldDemoUncheckedCreateInput {
+  id: String
+  theBigInt: BigInt
+  theBoolean: Boolean
+  theBytes: Bytes
+  theDateTime: DateTime
+  theDecimal: Decimal
+  theFloat: Float
+  theInt: Int
+  theJson: Json
+  theString: String
+}
+
+input FieldDemoUncheckedUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  theBigInt: NullableBigIntFieldUpdateOperationsInput
+  theBoolean: NullableBoolFieldUpdateOperationsInput
+  theBytes: NullableBytesFieldUpdateOperationsInput
+  theDateTime: NullableDateTimeFieldUpdateOperationsInput
+  theDecimal: NullableDecimalFieldUpdateOperationsInput
+  theFloat: NullableFloatFieldUpdateOperationsInput
+  theInt: NullableIntFieldUpdateOperationsInput
+  theJson: Json
+  theString: NullableStringFieldUpdateOperationsInput
+}
+
+input FieldDemoUncheckedUpdateManyInput {
+  id: StringFieldUpdateOperationsInput
+  theBigInt: NullableBigIntFieldUpdateOperationsInput
+  theBoolean: NullableBoolFieldUpdateOperationsInput
+  theBytes: NullableBytesFieldUpdateOperationsInput
+  theDateTime: NullableDateTimeFieldUpdateOperationsInput
+  theDecimal: NullableDecimalFieldUpdateOperationsInput
+  theFloat: NullableFloatFieldUpdateOperationsInput
+  theInt: NullableIntFieldUpdateOperationsInput
+  theJson: Json
+  theString: NullableStringFieldUpdateOperationsInput
+}
+
+input FieldDemoUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  theBigInt: NullableBigIntFieldUpdateOperationsInput
+  theBoolean: NullableBoolFieldUpdateOperationsInput
+  theBytes: NullableBytesFieldUpdateOperationsInput
+  theDateTime: NullableDateTimeFieldUpdateOperationsInput
+  theDecimal: NullableDecimalFieldUpdateOperationsInput
+  theFloat: NullableFloatFieldUpdateOperationsInput
+  theInt: NullableIntFieldUpdateOperationsInput
+  theJson: Json
+  theString: NullableStringFieldUpdateOperationsInput
+}
+
+input FieldDemoUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  theBigInt: NullableBigIntFieldUpdateOperationsInput
+  theBoolean: NullableBoolFieldUpdateOperationsInput
+  theBytes: NullableBytesFieldUpdateOperationsInput
+  theDateTime: NullableDateTimeFieldUpdateOperationsInput
+  theDecimal: NullableDecimalFieldUpdateOperationsInput
+  theFloat: NullableFloatFieldUpdateOperationsInput
+  theInt: NullableIntFieldUpdateOperationsInput
+  theJson: Json
+  theString: NullableStringFieldUpdateOperationsInput
+}
+
+input FieldDemoWhereInput {
+  AND: [FieldDemoWhereInput]
+  NOT: [FieldDemoWhereInput]
+  OR: [FieldDemoWhereInput]
+  id: StringFilter
+  theBigInt: BigIntNullableFilter
+  theBoolean: BoolNullableFilter
+  theBytes: BytesNullableFilter
+  theDateTime: DateTimeNullableFilter
+  theDecimal: DecimalNullableFilter
+  theFloat: FloatNullableFilter
+  theInt: IntNullableFilter
+  theJson: JsonNullableFilter
+  theString: StringNullableFilter
+}
+
+input FieldDemoWhereUniqueInput {
+  id: String
+}
+
+input FloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
+  notIn: [Float]
+}
+
+input FloatNullableWithAggregatesFilter {
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedFloatNullableFilter
+  _min: NestedFloatNullableFilter
+  _sum: NestedFloatNullableFilter
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableWithAggregatesFilter
+  notIn: [Float]
+}
+
+input IntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
+  notIn: [Int]
+}
+
+input IntNullableWithAggregatesFilter {
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedIntNullableFilter
+  _min: NestedIntNullableFilter
+  _sum: NestedIntNullableFilter
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableWithAggregatesFilter
+  notIn: [Int]
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
 scalar Json @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+enum JsonNullValueFilter {
+  AnyNull
+  DbNull
+  JsonNull
+}
+
+input JsonNullableFilter {
+  array_contains: Json
+  array_ends_with: Json
+  array_starts_with: Json
+  equals: Json
+  gt: Json
+  gte: Json
+  lt: Json
+  lte: Json
+  not: Json
+  path: [String]
+  string_contains: String
+  string_ends_with: String
+  string_starts_with: String
+}
+
+input JsonNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedJsonNullableFilter
+  _min: NestedJsonNullableFilter
+  array_contains: Json
+  array_ends_with: Json
+  array_starts_with: Json
+  equals: Json
+  gt: Json
+  gte: Json
+  lt: Json
+  lte: Json
+  not: Json
+  path: [String]
+  string_contains: String
+  string_ends_with: String
+  string_starts_with: String
+}
 
 type Mutation {
   """Change Password"""
@@ -95,6 +594,9 @@ type Mutation {
     """origin password"""
     password: String!
   ): AuthPayload!
+  createOneFieldDemo(data: FieldDemoCreateInput!): FieldDemo!
+  deleteManyFieldDemo(where: FieldDemoWhereInput): BatchPayload!
+  deleteOneFieldDemo(where: FieldDemoWhereUniqueInput!): FieldDemo
 
   """Sign In"""
   signIn(
@@ -107,12 +609,55 @@ type Mutation {
 
   """user sign up"""
   signUp(data: SignUpInput!): User!
+  updateManyFieldDemo(data: FieldDemoUpdateManyMutationInput!, where: FieldDemoWhereInput): BatchPayload!
+  updateOneFieldDemo(data: FieldDemoUpdateInput!, where: FieldDemoWhereUniqueInput!): FieldDemo!
   updateProfile(data: UpdateProfileInput!): User!
+  upsertOneFieldDemo(create: FieldDemoCreateInput!, update: FieldDemoUpdateInput!, where: FieldDemoWhereUniqueInput!): FieldDemo!
+}
+
+input NestedBigIntNullableFilter {
+  equals: BigInt
+  gt: BigInt
+  gte: BigInt
+  in: [BigInt]
+  lt: BigInt
+  lte: BigInt
+  not: NestedBigIntNullableFilter
+  notIn: [BigInt]
+}
+
+input NestedBigIntNullableWithAggregatesFilter {
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedBigIntNullableFilter
+  _min: NestedBigIntNullableFilter
+  _sum: NestedBigIntNullableFilter
+  equals: BigInt
+  gt: BigInt
+  gte: BigInt
+  in: [BigInt]
+  lt: BigInt
+  lte: BigInt
+  not: NestedBigIntNullableWithAggregatesFilter
+  notIn: [BigInt]
 }
 
 input NestedBoolFilter {
   equals: Boolean
   not: NestedBoolFilter
+}
+
+input NestedBoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+input NestedBoolNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedBoolNullableFilter
+  _min: NestedBoolNullableFilter
+  equals: Boolean
+  not: NestedBoolNullableWithAggregatesFilter
 }
 
 input NestedBoolWithAggregatesFilter {
@@ -123,6 +668,23 @@ input NestedBoolWithAggregatesFilter {
   not: NestedBoolWithAggregatesFilter
 }
 
+input NestedBytesNullableFilter {
+  equals: Bytes
+  in: [Bytes]
+  not: NestedBytesNullableFilter
+  notIn: [Bytes]
+}
+
+input NestedBytesNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedBytesNullableFilter
+  _min: NestedBytesNullableFilter
+  equals: Bytes
+  in: [Bytes]
+  not: NestedBytesNullableWithAggregatesFilter
+  notIn: [Bytes]
+}
+
 input NestedDateTimeFilter {
   equals: DateTime
   gt: DateTime
@@ -131,6 +693,31 @@ input NestedDateTimeFilter {
   lt: DateTime
   lte: DateTime
   not: NestedDateTimeFilter
+  notIn: [DateTime]
+}
+
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime]
+}
+
+input NestedDateTimeNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedDateTimeNullableFilter
+  _min: NestedDateTimeNullableFilter
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableWithAggregatesFilter
   notIn: [DateTime]
 }
 
@@ -148,6 +735,60 @@ input NestedDateTimeWithAggregatesFilter {
   notIn: [DateTime]
 }
 
+input NestedDecimalNullableFilter {
+  equals: Decimal
+  gt: Decimal
+  gte: Decimal
+  in: [Decimal]
+  lt: Decimal
+  lte: Decimal
+  not: NestedDecimalNullableFilter
+  notIn: [Decimal]
+}
+
+input NestedDecimalNullableWithAggregatesFilter {
+  _avg: NestedDecimalNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedDecimalNullableFilter
+  _min: NestedDecimalNullableFilter
+  _sum: NestedDecimalNullableFilter
+  equals: Decimal
+  gt: Decimal
+  gte: Decimal
+  in: [Decimal]
+  lt: Decimal
+  lte: Decimal
+  not: NestedDecimalNullableWithAggregatesFilter
+  notIn: [Decimal]
+}
+
+input NestedFloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
+  notIn: [Float]
+}
+
+input NestedFloatNullableWithAggregatesFilter {
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedFloatNullableFilter
+  _min: NestedFloatNullableFilter
+  _sum: NestedFloatNullableFilter
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableWithAggregatesFilter
+  notIn: [Float]
+}
+
 input NestedIntFilter {
   equals: Int
   gt: Int
@@ -157,6 +798,49 @@ input NestedIntFilter {
   lte: Int
   not: NestedIntFilter
   notIn: [Int]
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
+  notIn: [Int]
+}
+
+input NestedIntNullableWithAggregatesFilter {
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedIntNullableFilter
+  _min: NestedIntNullableFilter
+  _sum: NestedIntNullableFilter
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableWithAggregatesFilter
+  notIn: [Int]
+}
+
+input NestedJsonNullableFilter {
+  array_contains: Json
+  array_ends_with: Json
+  array_starts_with: Json
+  equals: Json
+  gt: Json
+  gte: Json
+  lt: Json
+  lte: Json
+  not: Json
+  path: [String]
+  string_contains: String
+  string_ends_with: String
+  string_starts_with: String
 }
 
 input NestedStringFilter {
@@ -169,6 +853,37 @@ input NestedStringFilter {
   lt: String
   lte: String
   not: NestedStringFilter
+  notIn: [String]
+  startsWith: String
+}
+
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String]
+  startsWith: String
+}
+
+input NestedStringNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedStringNullableFilter
+  _min: NestedStringNullableFilter
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String]
+  lt: String
+  lte: String
+  not: NestedStringNullableWithAggregatesFilter
   notIn: [String]
   startsWith: String
 }
@@ -190,7 +905,66 @@ input NestedStringWithAggregatesFilter {
   startsWith: String
 }
 
+input NullableBigIntFieldUpdateOperationsInput {
+  decrement: BigInt
+  divide: BigInt
+  increment: BigInt
+  multiply: BigInt
+  set: BigInt
+}
+
+input NullableBoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input NullableBytesFieldUpdateOperationsInput {
+  set: Bytes
+}
+
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input NullableDecimalFieldUpdateOperationsInput {
+  decrement: Decimal
+  divide: Decimal
+  increment: Decimal
+  multiply: Decimal
+  set: Decimal
+}
+
+input NullableFloatFieldUpdateOperationsInput {
+  decrement: Float
+  divide: Float
+  increment: Float
+  multiply: Float
+  set: Float
+}
+
+input NullableIntFieldUpdateOperationsInput {
+  decrement: Int
+  divide: Int
+  increment: Int
+  multiply: Int
+  set: Int
+}
+
+enum NullableJsonNullValueInput {
+  DbNull
+  JsonNull
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
 type Query {
+  aggregateFieldDemo(cursor: FieldDemoWhereUniqueInput, orderBy: [FieldDemoOrderByWithRelationInput], skip: Int, take: Int, where: FieldDemoWhereInput): AggregateFieldDemo
+  findFirstFieldDemo(cursor: FieldDemoWhereUniqueInput, distinct: [FieldDemoScalarFieldEnum], orderBy: [FieldDemoOrderByWithRelationInput], skip: Int, take: Int, where: FieldDemoWhereInput): FieldDemo
+  findManyFieldDemo(cursor: FieldDemoWhereUniqueInput, distinct: [FieldDemoScalarFieldEnum], orderBy: [FieldDemoOrderByWithRelationInput], skip: Int, take: Int, where: FieldDemoWhereInput): [FieldDemo!]!
+  findManyFieldDemoCount(cursor: FieldDemoWhereUniqueInput, distinct: [FieldDemoScalarFieldEnum], orderBy: [FieldDemoOrderByWithRelationInput], skip: Int, take: Int, where: FieldDemoWhereInput): Int!
+  findUniqueFieldDemo(where: FieldDemoWhereUniqueInput!): FieldDemo
+
   """get current user info"""
   me: User!
 }
@@ -227,6 +1001,39 @@ input StringFilter {
   lte: String
   mode: QueryMode
   not: NestedStringFilter
+  notIn: [String]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+  notIn: [String]
+  startsWith: String
+}
+
+input StringNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedStringNullableFilter
+  _min: NestedStringNullableFilter
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringNullableWithAggregatesFilter
   notIn: [String]
   startsWith: String
 }

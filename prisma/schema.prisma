@@ -22,3 +22,17 @@ model User {
   password  String
   nickName  String
 }
+
+// Fields Demo
+model FieldDemo {
+  id          String    @id @default(cuid())
+  theBigInt   BigInt?   @default(0)
+  theDateTime DateTime? @default(now())
+  theBytes    Bytes?    @default("abc")
+  theDecimal  Decimal?  @default(0.5)
+  theJson     Json?     @default("{\"key\":\"value\"}")
+  theString   String?   @default("")
+  theInt      Int?      @default(0)
+  theBoolean  Boolean?  @default(false)
+  theFloat    Float?    @default(0.5)
+}
