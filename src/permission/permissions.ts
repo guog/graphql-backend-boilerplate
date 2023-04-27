@@ -3,10 +3,10 @@ import { isAuthenticated } from './rules'
 
 const permissions = {
   Query: {
-    '*': isAuthenticated
+    '*': allow
   },
   Mutation: {
-    '*': isAuthenticated,
+    '*': allow,
     signIn: allow
   }
 }
