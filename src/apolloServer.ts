@@ -100,9 +100,9 @@ export function initializeApolloServer(
   })
 
   app.use(
-    '/api',
+    '/rest',
     useSofa({
-      basePath: '/api',
+      basePath: '/rest',
       schema: schema,
       context: createContext,
       errorHandler(errs) {
@@ -114,13 +114,13 @@ export function initializeApolloServer(
       },
       onRoute(info) {
         openApi.addRoute(info, {
-          basePath: '/api'
+          basePath: '/rest'
         })
       }
     })
   )
-  app.use('/', express.static('public'))
-  outputJSON(path.join('public', 'swagger.json'), openApi.get(), {
+  app.use('/swagger/', express.static('public'))
+  outputJSON(path.join('public', '/swagger.json'), openApi.get(), {
     EOL: '',
     spaces: 2
   })
@@ -135,7 +135,9 @@ export function initializeApolloServer(
 
   return (): void => {
     process.stdout.write(
-      `🚀 Server ready at http://localhost:${port}${APP_PATH}\n`
+      `GraphQL Server ready at http://localhost:${port}${APP_PATH}
+RESTful Server ready at http://localhost:${port}/rest/
+Swagger Docs at http://localhost:${port}/swagger/`
     )
   }
 }
