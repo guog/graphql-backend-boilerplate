@@ -8,7 +8,7 @@ export const FieldDemo = objectType({
   name: 'FieldDemo',
   definition(t) {
     t.string('id')
-    t.nullable.bigInt('theBigInt')
+    t.nullable.bigint('theBigInt')
     t.nullable.field('theDateTime', { type: 'DateTime' })
     t.nullable.bytes('theBytes')
     t.nullable.decimal('theDecimal')
